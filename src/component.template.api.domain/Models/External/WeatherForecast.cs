@@ -1,4 +1,4 @@
-namespace component.template.api
+namespace component.template.api.domain
 {
     public class WeatherForecast
     {

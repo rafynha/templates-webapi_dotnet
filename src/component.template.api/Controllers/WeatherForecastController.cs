@@ -1,3 +1,4 @@
+using component.template.api.domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace component.template.api.Controllers

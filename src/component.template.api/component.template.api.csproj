@@ -11,4 +11,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\component.template.api.configuration\component.template.api.configuration.csproj" />
+    <ProjectReference Include="..\component.template.api.domain\component.template.api.domain.csproj" />
+  </ItemGroup>
+
 </Project>
