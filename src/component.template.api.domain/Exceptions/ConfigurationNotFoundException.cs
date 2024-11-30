@@ -5,7 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace component.template.api.domain.Models.Exceptions
+namespace component.template.api.domain.Exceptions
 {
     [System.Serializable]
     public class ConfigurationNotFoundExceptionException : System.Exception

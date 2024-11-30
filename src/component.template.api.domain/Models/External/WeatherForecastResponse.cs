@@ -1,6 +1,6 @@
 namespace component.template.api.domain
 {
-    public class WeatherForecast
+    public class WeatherForecastResponse
     {
         public DateOnly Date { get; set; }
 

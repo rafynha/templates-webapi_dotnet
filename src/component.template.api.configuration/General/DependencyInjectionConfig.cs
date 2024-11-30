@@ -1,5 +1,5 @@
 ﻿using component.template.api.configuration.Database;
-using component.template.api.domain.Models.Exceptions;
+using component.template.api.domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
