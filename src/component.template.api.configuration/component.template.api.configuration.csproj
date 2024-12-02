@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\component.template.api.business\component.template.api.business.csproj" />
     <ProjectReference Include="..\component.template.api.domain\component.template.api.domain.csproj" />
   </ItemGroup>
 

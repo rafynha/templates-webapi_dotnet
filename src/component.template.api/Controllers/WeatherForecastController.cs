@@ -1,5 +1,8 @@
 using component.template.api.domain;
+using component.template.api.domain.Exceptions;
+using component.template.api.domain.Factory;
 using component.template.api.domain.Interfaces.Business;
+using component.template.api.domain.Models.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace component.template.api.Controllers
@@ -7,7 +10,7 @@ namespace component.template.api.Controllers
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
-    {        
+    {
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IWeatherForecastBusiness _weatherForecastBusiness;
 
@@ -18,10 +21,23 @@ namespace component.template.api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DefaultResponse<WeatherForecastResponse>))]
-        public IEnumerable<WeatherForecastResponse> Get()
+        //[ResponseFilterFactory]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DefaultApiResponse<WeatherForecastResponse>))]
+        public async Task<ActionResult<IEnumerable<WeatherForecastResponse>>> Get()
         {
-            return _weatherForecastBusiness.GetAll();
+            _logger.LogInformation($"Iniciando endpoint Put do controller {typeof(WeatherForecastController)} --> Params: {string.Empty/*Newtonsoft.Json.JsonConvert.SerializeObject(request)*/}");
+
+            if (ModelState.IsValid)
+            {
+                var response = new DefaultApiResponse<IEnumerable<WeatherForecastResponse>>(
+                    await _weatherForecastBusiness.GetAll()
+                );                
+                return Ok(await _weatherForecastBusiness.GetAll());
+            }
+            else
+            {
+                throw new InvalidModelStateException($"ModelState do controller {typeof(WeatherForecastController)} inválido! --> Params:");
+            }
         }
     }
 }

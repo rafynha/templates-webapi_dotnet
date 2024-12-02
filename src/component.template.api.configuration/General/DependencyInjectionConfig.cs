@@ -1,5 +1,7 @@
 ﻿using component.template.api.configuration.Database;
 using component.template.api.domain.Exceptions;
+using component.template.api.domain.Interfaces.Handle;
+using component.template.api.domain.Models.Handle;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +13,7 @@ namespace component.template.api.configuration.General
      {
           private IConfiguration _configuration { get;}
           public DependencyInjectionConfig(IConfiguration configuration)
-          {
-               
+          {               
                _configuration = configuration;
           }
 
@@ -51,8 +52,8 @@ namespace component.template.api.configuration.General
 
           private void BusinessBuilder(IServiceCollection services)
           {
-               // services.AddScoped<IErrorHandle, ErrorHandle>();
-               // services.AddScoped<domain.Interfaces.Business.IUser, business.UserBusiness>();
+               services.AddScoped<IErrorHandle, ErrorHandle>();
+               services.AddScoped<domain.Interfaces.Business.IWeatherForecastBusiness, business.WeatherForecastBusiness>();
           }
 
           private void DataBuilder(IServiceCollection services)

@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
+using component.template.api.domain.Interfaces.Common;
 using Newtonsoft.Json;
 
 namespace component.template.api.domain.Exceptions
 {
     [System.Serializable]
-    public class ConfigurationNotFoundExceptionException : System.Exception
+    public class ConfigurationNotFoundExceptionException : System.Exception, ICustomException
     {
         private const string customMessage = "Invalid values.";
         public string DetailsMessage
