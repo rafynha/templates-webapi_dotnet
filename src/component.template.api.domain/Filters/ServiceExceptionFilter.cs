@@ -77,7 +77,7 @@ public class ServiceExceptionFilter : ExceptionFilterAttribute
             // typeof(NullParameterException),
             // typeof(ProcessErrorException),
             // typeof(UnauthorizedException),
-            // typeof(UnexpectedErrorException),
+            typeof(InvalidModelStateException),
             typeof(ConfigurationNotFoundExceptionException)
         };
 

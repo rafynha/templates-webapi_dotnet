@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -17,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\component.template.api.business\component.template.api.business.csproj" />
     <ProjectReference Include="..\component.template.api.domain\component.template.api.domain.csproj" />
+    <ProjectReference Include="..\component.template.api.infrastructure\component.template.api.infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
