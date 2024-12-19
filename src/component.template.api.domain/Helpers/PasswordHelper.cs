@@ -18,6 +18,9 @@ public static class PasswordHelper
         }
     }
 
+    public static bool VerifyPassword(string hashedPassword, string inputPassword) => 
+        hashedPassword == HashPassword(inputPassword);    
+
     public static bool CompareWithLastPassword(string oldPassword, string newPassword) =>    
         oldPassword.Equals(HashPassword(newPassword));    
 }

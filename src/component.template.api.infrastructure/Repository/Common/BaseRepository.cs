@@ -22,7 +22,15 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
 
     public async Task<IEnumerable<T>> GetAllAsync()
     {
-        return await _dbSet.ToListAsync();
+        try
+        {
+            return await _dbSet.ToListAsync();
+        }
+        catch (System.Exception ex)
+        {
+            
+            throw;
+        }
     }
 
     public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)

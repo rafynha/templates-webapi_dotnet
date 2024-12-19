@@ -1,6 +1,7 @@
 using component.template.api.configuration;
 using component.template.api.configuration.General;
 using component.template.api.domain.Filters;
+using component.template.api.domain.Helpers;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,7 +38,7 @@ builder.Services.AddSwaggerGen(c =>
             });
 
 builder.Services.AddConfiguration(new DependencyInjectionConfig(builder.Configuration));
-
+builder.Services.AddHttpContextAccessor();
 
 
 var app = builder.Build();
@@ -48,13 +49,12 @@ var app = builder.Build();
 
 //}
 
+HttpHelper.Configure(app.Services.GetRequiredService<IHttpContextAccessor>());
+app.UseMiddleware<component.template.api.domain.Middleware.ServiceHttpContextMiddleware>();
+
 app.UseSwagger();
 app.UseSwaggerUI();
-
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

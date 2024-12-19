@@ -9,6 +9,11 @@ using component.template.api.infrastructure.Repository.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using component.template.api.domain.Interfaces.Business.Common;
+using component.template.api.domain.Common;
+using component.template.api.domain.Models.Common;
+using component.template.api.domain.Models.External;
+using component.template.api.domain.Filters;
 
 namespace component.template.api.configuration.General
 {
@@ -27,6 +32,7 @@ namespace component.template.api.configuration.General
                ServiceBuilder(services);
                BusinessBuilder(services);
                DataBuilder(services);
+               CommonBuilder(services);
           }
 
           private void DatabaseBuilder(IServiceCollection services)
@@ -47,7 +53,7 @@ namespace component.template.api.configuration.General
                {
                     services.AddDbContext<SqlContext>(options =>
                          options.UseSqlServer(_configuration["Database:Sql:ConnectionString"]));
-               }              
+               }
           }
 
           private void ServiceBuilder(IServiceCollection services)
@@ -69,6 +75,7 @@ namespace component.template.api.configuration.General
           {
                services.AddScoped<IErrorHandle, ErrorHandle>();
                services.AddScoped<domain.Interfaces.Business.IWeatherForecastBusiness, business.WeatherForecastBusiness>();
+               services.AddScoped<domain.Interfaces.Business.IUserBusiness, business.BusinessServices.UserBusiness>();  
           }
 
           private void DataBuilder(IServiceCollection services)
@@ -78,7 +85,12 @@ namespace component.template.api.configuration.General
                services.AddScoped<IPermissionRepository, PermissionRepository>();
                services.AddScoped<IUserProfileRepository, UserProfileRepository>();
                services.AddScoped<IProfilePermissionRepository, ProfilePermissionRepository>();
-               services.AddScoped<IUnitOfWork, UnitOfWorkForSql>();           
+               services.AddScoped<IUnitOfWork, UnitOfWorkForSql>();
+          }
+
+          private void CommonBuilder(IServiceCollection services)
+          {
+               // services.AddScoped<HttpHelper>();
           }
      }
 }

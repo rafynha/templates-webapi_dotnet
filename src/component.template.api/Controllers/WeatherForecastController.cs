@@ -1,6 +1,7 @@
 using component.template.api.domain;
 using component.template.api.domain.Exceptions;
 using component.template.api.domain.Factory;
+using component.template.api.domain.Helpers;
 using component.template.api.domain.Interfaces.Business;
 using component.template.api.domain.Interfaces.Common;
 using component.template.api.domain.Models.Common;
