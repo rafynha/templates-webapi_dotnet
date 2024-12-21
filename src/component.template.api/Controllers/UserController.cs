@@ -34,5 +34,18 @@ namespace component.template.api.Controllers
             else
                 throw new InvalidModelStateException($"ModelState do controller {typeof(UserController)} inválido! --> Params:  {Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
         }
+
+        // [HttpGet]
+        // //[ResponseFilterFactory]
+        // [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IApiResponse<IEnumerable<WeatherForecastResponse>>))]
+        // public async Task<ActionResult> Get()
+        // {
+        //     _logger.LogInformation($"Iniciando endpoint Put do controller {typeof(WeatherForecastController)} --> Params: {string.Empty/*Newtonsoft.Json.JsonConvert.SerializeObject(request)*/}");
+
+        //     if (ModelState.IsValid)
+        //         return Ok(await _weatherForecastBusiness.GetAll());
+        //     else
+        //         throw new InvalidModelStateException($"ModelState do controller {typeof(WeatherForecastController)} inválido! --> Params:");
+        // }
     }
 }

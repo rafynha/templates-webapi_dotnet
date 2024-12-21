@@ -74,7 +74,6 @@ namespace component.template.api.configuration.General
           private void BusinessBuilder(IServiceCollection services)
           {
                services.AddScoped<IErrorHandle, ErrorHandle>();
-               services.AddScoped<domain.Interfaces.Business.IWeatherForecastBusiness, business.WeatherForecastBusiness>();
                services.AddScoped<domain.Interfaces.Business.IUserBusiness, business.BusinessServices.UserBusiness>();  
                services.AddScoped<domain.Interfaces.Business.IProfileBusiness, business.BusinessServices.ProfileBusiness>();  
           }
