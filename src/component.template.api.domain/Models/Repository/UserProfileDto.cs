@@ -10,7 +10,7 @@ public class UserProfileDto
         public int UserProfileId { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public long UserId { get; set; }
 
         [ForeignKey("Profile")]
         public int ProfileId { get; set; }

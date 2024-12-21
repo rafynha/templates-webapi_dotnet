@@ -25,7 +25,7 @@ public abstract class BaseBusiness
                 if(HttpHelper.HttpContext.Items[item.GetType().Name] == null)
                     HttpHelper.AddContextItem<IBusinessServices>(item.GetType().GetInterfaces().FirstOrDefault().Name, item);
             }
-        if(unitOfWork != null)
+        if(unitOfWork != null && HttpHelper.HttpContext.Items[unitOfWork.GetType().GetInterfaces().FirstOrDefault().Name] == null)
              HttpHelper.AddContextItem<IUnitOfWork>(unitOfWork.GetType().GetInterfaces().FirstOrDefault().Name, unitOfWork);
     }
 }

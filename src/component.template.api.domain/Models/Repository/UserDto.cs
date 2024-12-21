@@ -7,7 +7,7 @@ namespace component.template.api.domain.Models.Repository;
 public class UserDto
 {
         [Key]
-        public int UserId { get; set; }
+        public long UserId { get; set; }
 
         [Required, MaxLength(50)]
         public string Username { get; set; }

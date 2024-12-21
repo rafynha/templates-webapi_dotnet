@@ -1,3 +1,4 @@
+using AutoMapper;
 using component.template.api.domain.Common;
 using component.template.api.domain.Models.Common;
 
@@ -5,6 +6,10 @@ namespace component.template.api.business.Operations;
 
 public class GetUserOperation : BaseOperation<EmptyRequest, EmptyResponse>
 {
+    public override void ConfigureMappings(IMapperConfigurationExpression cfg)
+    {
+    }
+
     public override async Task<EmptyResponse> RunAsync(EmptyRequest input)
     {
         return await Task.FromResult(new EmptyResponse());

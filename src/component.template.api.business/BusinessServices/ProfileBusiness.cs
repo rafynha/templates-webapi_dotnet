@@ -7,21 +7,19 @@ using component.template.api.domain.Models.External;
 
 namespace component.template.api.business.BusinessServices;
 
-public class UserBusiness : BaseBusiness, IUserBusiness
+public class ProfileBusiness : BaseBusiness, IProfileBusiness
 {
-    private readonly CreateUserOperation _createUserOperation = new();
-
-    public UserBusiness(IUnitOfWork unitOfWork, IProfileBusiness profileBusiness)
-    {
+    private readonly GetProfileByNameOperation _getProfileByNameOperation = new();
+    public ProfileBusiness(IUnitOfWork unitOfWork)
+    {;
         RegisterBusinessServicesDependencies(
-            new List<IBusinessServices> 
-            { 
-                this,
-                profileBusiness                
+            new List<IBusinessServices>
+            {
+                this
             },
             unitOfWork);
     }
 
-    public async Task<CreateUserResponse> Create(CreateUserRequest request) =>
-        await _createUserOperation.ExecuteOperation(request);    
+    public async Task<GetProfileByNameResponse?> GetByName(GetProfileByNameRequest request) =>
+        await _getProfileByNameOperation.ExecuteOperation(request);
 }

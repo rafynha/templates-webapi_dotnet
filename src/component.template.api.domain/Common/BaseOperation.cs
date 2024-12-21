@@ -1,4 +1,5 @@
 using System;
+using AutoMapper;
 using component.template.api.domain.Helpers;
 using component.template.api.domain.Interfaces.Business.Common;
 using component.template.api.domain.Interfaces.Infrastructure.Repository.Common;
@@ -11,6 +12,13 @@ public abstract class BaseOperation<TInput, TOutput> : IBusinessOperation<TInput
 {
     protected Dictionary<System.Type, IBusinessServices> _services { get; set; }
     public HttpContextAccessInfo _contextAccessInfo { get; set; }
+    public IMapper _mapper { 
+        get 
+        {
+            return new MapperConfiguration(cfg => ConfigureMappings(cfg)).CreateMapper();
+        } 
+    }
+    public abstract void ConfigureMappings(IMapperConfigurationExpression cfg);
 
     public Task<TOutput> ExecuteOperation(TInput input, Dictionary<System.Type, IBusinessServices> services = null)
     {
