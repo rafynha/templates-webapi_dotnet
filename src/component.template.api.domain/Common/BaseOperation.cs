@@ -29,12 +29,12 @@ public abstract class BaseOperation<TInput, TOutput> : IBusinessOperation<TInput
         return this.RunAsync(input);
     }
 
-    public Task<TOutput> ExecuteOperation(TInput input)
+    public async Task<TOutput> ExecuteOperation(TInput input)
     {
         this._contextAccessInfo = HttpHelper.HttpContext.Items[nameof(HttpContextAccessInfo)] as HttpContextAccessInfo;
 
-        this.ValidateAsync(input);
-        return this.RunAsync(input);
+        await this.ValidateAsync(input);
+        return await this.RunAsync(input);
     }
 
     public T GetService<T>() where T : IBusinessServices

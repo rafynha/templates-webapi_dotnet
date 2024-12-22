@@ -13,6 +13,7 @@ public static class HttpHelper
 
     public static void AddContextItem<T>(string name, T item) where T : class
     {
-        HttpHelper.HttpContext.Items.Add(name,item);
+        if(HttpHelper.HttpContext.Items[name] == null)
+            HttpHelper.HttpContext.Items.Add(name,item);
     }
 }

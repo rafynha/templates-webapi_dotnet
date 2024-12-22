@@ -1,5 +1,6 @@
 using AutoMapper;
 using component.template.api.domain.Common;
+using component.template.api.domain.Exceptions;
 using component.template.api.domain.Interfaces.Infrastructure.Repository.Common;
 using component.template.api.domain.Models.External;
 using component.template.api.domain.Models.Repository;
@@ -16,7 +17,7 @@ public class GetProfileByNameOperation : BaseOperation<GetProfileByNameRequest, 
     public override async Task ValidateAsync(GetProfileByNameRequest input)
     {
         if (string.IsNullOrWhiteSpace(input?.Name))
-            throw new ArgumentException("ProfileName cannot be null or empty", nameof(input.Name));
+            throw new RequiredFieldException("ProfileName cannot be null or empty", nameof(input.Name));
         
         await Task.CompletedTask;
     }
@@ -36,7 +37,9 @@ public class GetProfileByNameOperation : BaseOperation<GetProfileByNameRequest, 
             {
                 // TODO: Logar erro de perfil não encontrado
                 return default;
-            }                    
+            }       
+            await unitOfWork.CommitTransactionAsync();        
+
             return _mapper.Map<ProfileDto, GetProfileByNameResponse>(adminProfileEntity);
         }
         catch

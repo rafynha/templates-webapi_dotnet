@@ -73,10 +73,11 @@ public class ServiceExceptionFilter : ExceptionFilterAttribute
             // typeof(CallServiceErrorException),
             // typeof(DataNotFoundException),
             // typeof(ExistingDataException),
-            // typeof(InvalidParameterException),
             // typeof(NullParameterException),
             // typeof(ProcessErrorException),
             // typeof(UnauthorizedException),
+            typeof(InvalidFieldException),
+            typeof(RequiredFieldException),  
             typeof(InvalidModelStateException),
             typeof(ConfigurationNotFoundExceptionException)
         };

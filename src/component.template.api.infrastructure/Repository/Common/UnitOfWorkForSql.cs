@@ -7,6 +7,7 @@ namespace component.template.api.infrastructure.Repository.Common;
 public class UnitOfWorkForSql : IUnitOfWork
 {
     private readonly SqlContext _context;
+    private bool TransactionAlreadyOpen { get; set; }
 
     public IUserRepository Users { get; }
     public IProfileRepository Profiles { get; }
@@ -40,15 +41,20 @@ public class UnitOfWorkForSql : IUnitOfWork
         {
             await _context.Database.BeginTransactionAsync();
         }
+        else
+            TransactionAlreadyOpen = true;
     }
 
     public async Task CommitTransactionAsync()
     {
         var transaction = _context.Database.CurrentTransaction;
-        if (transaction != null)
+        if (transaction != null && !TransactionAlreadyOpen)
         {
+            await _context.SaveChangesAsync();
             await transaction.CommitAsync();
         }
+        else
+            TransactionAlreadyOpen = false;
     }
 
     public async Task RollbackAsync()

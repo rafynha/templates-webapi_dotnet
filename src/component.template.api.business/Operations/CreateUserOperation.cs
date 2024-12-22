@@ -1,5 +1,6 @@
 using AutoMapper;
 using component.template.api.domain.Common;
+using component.template.api.domain.Exceptions;
 using component.template.api.domain.Helpers;
 using component.template.api.domain.Interfaces.Business;
 using component.template.api.domain.Interfaces.Infrastructure.Repository.Common;
@@ -18,10 +19,13 @@ public class CreateUserOperation : BaseOperation<CreateUserRequest, CreateUserRe
     public override async Task ValidateAsync(CreateUserRequest input)
     {
         if (string.IsNullOrWhiteSpace(input.Email))
-            throw new ArgumentException("O email não pode ser vazio.", nameof(input.Email));
+            throw new RequiredFieldException("O email não pode ser vazio.", nameof(input.Email));
+
+        if (!EmailHelper.IsValidEmail(input.Email))
+            throw new InvalidFieldException("O email fornecido não é válido.", nameof(input.Email));
 
         if (string.IsNullOrWhiteSpace(input.Password))
-            throw new ArgumentException("A senha não pode ser vazia.", nameof(input.Password));
+            throw new RequiredFieldException("A senha não pode ser vazia.", nameof(input.Password));
 
         await Task.CompletedTask;
     }
@@ -51,14 +55,14 @@ public class CreateUserOperation : BaseOperation<CreateUserRequest, CreateUserRe
             await SetAdminProfile(unitOfWork, user);
 
             await unitOfWork.CommitTransactionAsync(); // Commit das alterações e encerramento da transação
+
+            return await Task.FromResult(new CreateUserResponse(){ IdUser = user.UserId});
         }
         catch
         {
             await unitOfWork.RollbackAsync();
             throw;
-        }
-
-        return await Task.FromResult(new CreateUserResponse());
+        }        
     }
 
     #region Private Methods

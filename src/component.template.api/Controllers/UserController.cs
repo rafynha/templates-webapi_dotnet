@@ -30,7 +30,7 @@ namespace component.template.api.Controllers
             _logger.LogInformation($"Iniciando endpoint Put do controller {typeof(UserController)} --> Params: {Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
 
             if (ModelState.IsValid)
-                return Ok(await _userBusiness.Create(request));
+                return Created("", await _userBusiness.Create(request));
             else
                 throw new InvalidModelStateException($"ModelState do controller {typeof(UserController)} inválido! --> Params:  {Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
         }

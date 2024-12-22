@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace component.template.api.domain.Models.Repository;
 
-[Table("UserProfile")]
+[Table("UserProfiles")]
 public class UserProfileDto
 {
         [Key]

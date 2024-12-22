@@ -10,7 +10,7 @@ public class ServiceResultFilter : IResultFilter
     {
         if (context.Result is ObjectResult objectResult)
         {
-            if(objectResult.StatusCode == 200)
+            if(objectResult.StatusCode == 200 || objectResult.StatusCode == 201)
                 objectResult.Value = new DefaultApiResponse<object>{ Data = objectResult.Value };
         }
     }

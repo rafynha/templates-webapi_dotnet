@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace component.template.api.domain.Models.Repository;
 
-[Table("Permission")]
+[Table("Permissions")]
 public class PermissionDto
 {
         [Key]
