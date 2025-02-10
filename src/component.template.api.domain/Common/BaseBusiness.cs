@@ -15,17 +15,21 @@ public abstract class BaseBusiness
         this._contextAccessInfo = HttpHelper.HttpContext.Items[nameof(HttpContextAccessInfo)] as HttpContextAccessInfo;
     }
 
-    public virtual void RegisterBusinessServicesDependencies(List<IBusinessServices> services = null, IUnitOfWork unitOfWork = null)
+    public virtual void RegisterBusinessServicesDependencies(List<IBusinessServices> services = null, IUnitOfWork unitOfWork = null, , IConfiguration configuration = null)
     {
-        if(services != null)
+        if (services != null)
             foreach (var item in services)
             {
                 _services.Add(item?.GetType()?.GetInterfaces()?.FirstOrDefault() ?? item.GetType(), item);
-                
-                if(HttpHelper.HttpContext.Items[item.GetType().Name] == null)
+
+                if (HttpHelper.HttpContext.Items[item.GetType().Name] == null)
                     HttpHelper.AddContextItem<IBusinessServices>(item.GetType().GetInterfaces().FirstOrDefault().Name, item);
             }
-        if(unitOfWork != null && HttpHelper.HttpContext.Items[unitOfWork.GetType().GetInterfaces().FirstOrDefault().Name] == null)
-             HttpHelper.AddContextItem<IUnitOfWork>(unitOfWork.GetType().GetInterfaces().FirstOrDefault().Name, unitOfWork);
+
+        if (unitOfWork != null && HttpHelper.HttpContext.Items[unitOfWork.GetType().GetInterfaces().FirstOrDefault().Name] == null)
+            HttpHelper.AddContextItem<IUnitOfWork>(unitOfWork.GetType().GetInterfaces().FirstOrDefault().Name, unitOfWork);
+
+        if (configuration != null && HttpHelper.HttpContext.Items["IConfiguration"] == null)
+            HttpHelper.AddContextItem<IConfiguration>("IConfiguration", configuration);
     }
 }
