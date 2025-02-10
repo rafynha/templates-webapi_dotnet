@@ -61,6 +61,14 @@ public abstract class BaseOperation<TInput, TOutput> : IBusinessOperation<TInput
         return (T)(object)null;
     }
 
+    public T GetConfiguration<T>() where T : IConfiguration
+    {
+        if(HttpHelper.HttpContext.Items.TryGetValue(typeof(T)?.Name, out var configuration))
+            return (T)configuration;
+        
+        return (T)(object)null;
+    }
+
     public abstract Task ValidateAsync(TInput input);
     public abstract Task<TOutput> RunAsync(TInput input);
 }
